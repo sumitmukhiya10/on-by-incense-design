@@ -239,6 +239,66 @@ class StoreBackendFlowTests(unittest.TestCase):
         self.assertEqual(self.client.delete(f"/api/admin/enquiries/{enquiry.json()['id']}").status_code, 404)
         self.assertTrue(self.uploaded[0].exists(), "Deleting a product must leave its uploaded photo intact.")
 
+    def test_environment_reset_updates_only_admin_once_and_preserves_recovery(self):
+        self.set_up_admin()
+        sentinels = {
+            "products": [{"id": 81, "name": "Saved Chair"}],
+            "settings": {"business_name": "Saved Store"},
+            "discounts": {"tiers": [{"min_items": 2, "percent": 5}]},
+            "orders": {"records": [{"id": "TEST-ORDER", "customer_name": "Fixture Customer"}]},
+            "enquiries": {"records": [{"id": "TEST-MESSAGE", "message": "Fixture enquiry"}]},
+            "images": {"records": [{"path": "/images/products/fixture.jpg"}]},
+        }
+        for name, value in sentinels.items():
+            server.write_json(name, value)
+        saved_data = {name: server.read_json(name) for name in sentinels}
+        original_admin_hash = server.admin_data()["password_hash"]
+        new_password = "Railway Admin Password 123!"
+        new_master = "Railway Master Password 456!"
+        reset_env = {
+            "RESET_ADMIN_FROM_ENV": "true",
+            "INITIAL_ADMIN_PASSWORD": new_password,
+            "INITIAL_MASTER_PASSWORD": new_master,
+        }
+
+        with patch.dict(os.environ, reset_env):
+            with patch.dict(os.environ, {"INITIAL_MASTER_PASSWORD": ""}):
+                with self.assertRaises(RuntimeError):
+                    server.initialize_admin_from_environment()
+            self.assertEqual(server.admin_data()["password_hash"], original_admin_hash)
+
+            self.assertEqual(self.client.get("/api/admin/products").status_code, 200)
+            server.initialize_admin_from_environment()
+            self.assertTrue(server.admin_data()["environment_reset_applied"])
+            self.assertEqual(self.client.get("/api/admin/products").status_code, 401)
+            self.assertEqual(self.client.post("/api/admin/login", json={"password": "Strong Password 123!"}).status_code, 401)
+            self.assertEqual(self.client.post("/api/admin/login", json={"password": new_password}).status_code, 200)
+            self.assertEqual(self.client.post("/api/admin/recover", json={"recovery_password": "Master Recovery 456!", "new_password": "Wrong Master Reset 567!"}).status_code, 400)
+
+            recovered = self.client.post("/api/admin/recover", json={"recovery_password": new_master, "new_password": "Recovered Railway Admin 789!"})
+            self.assertEqual(recovered.status_code, 200, recovered.text)
+            self.assertTrue(recovered.json()["recovered_with_master_password"])
+
+            os.environ["INITIAL_ADMIN_PASSWORD"] = "Ignored Replacement Admin 234!"
+            os.environ["INITIAL_MASTER_PASSWORD"] = "Ignored Replacement Master 567!"
+            server.initialize_admin_from_environment()
+            self.client.post("/api/admin/logout")
+            self.assertEqual(self.client.post("/api/admin/login", json={"password": "Recovered Railway Admin 789!"}).status_code, 200)
+            self.assertEqual(self.client.post("/api/admin/login", json={"password": "Ignored Replacement Admin 234!"}).status_code, 401)
+
+            current_hash = server.admin_data()["password_hash"]
+            os.environ["RESET_ADMIN_FROM_ENV"] = "false"
+            server.initialize_admin_from_environment()
+            self.assertNotIn("environment_reset_applied", server.admin_data())
+            self.assertEqual(server.admin_data()["password_hash"], current_hash)
+            os.environ.pop("RESET_ADMIN_FROM_ENV")
+            os.environ["INITIAL_ADMIN_PASSWORD"] = "Another Ignored Admin 345!"
+            os.environ["INITIAL_MASTER_PASSWORD"] = "Another Ignored Master 678!"
+            server.initialize_admin_from_environment()
+            self.assertEqual(server.admin_data()["password_hash"], current_hash)
+
+        self.assertEqual({name: server.read_json(name) for name in sentinels}, saved_data)
+
 
 class RailwayStorageTests(unittest.TestCase):
     def test_volume_seeds_are_copied_once_and_images_keep_stable_urls(self):

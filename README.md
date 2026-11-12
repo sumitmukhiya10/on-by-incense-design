@@ -85,6 +85,12 @@ If any private file was already committed to GitHub, `.gitignore` alone does not
 
    You can leave `DATA_DIR` and `IMAGE_DIR` unset; they default to `/data/json` and `/data/images`. Set them only if you intentionally want different paths within the mounted volume.
 
+### Reset an already initialized Railway admin
+
+If an existing production admin password is not working, update `INITIAL_ADMIN_PASSWORD` and `INITIAL_MASTER_PASSWORD` in Railway Variables, then temporarily set `RESET_ADMIN_FROM_ENV=true` and redeploy using the same volume. The server validates both values, stores new password hashes in `/data/json/admin.json`, and clears active sessions. It does not change products, orders, enquiries, images, discounts, or store settings. Passwords and hashes are never written to logs.
+
+The reset is recorded in the existing admin file so leaving the flag on cannot reapply those values after the owner changes passwords. After confirming the new Admin and master recovery passwords work, set `RESET_ADMIN_FROM_ENV=false`, remove both `INITIAL_*_PASSWORD` variables, and redeploy. This clears the one-time reset marker without changing the saved credentials. To trigger another reset later, first deploy once with the flag false, then set new values and turn it true.
+
 ### 3. Set startup and health check
 
 The Dockerfile uses this production command, with Railway's `PORT` expanded at runtime:

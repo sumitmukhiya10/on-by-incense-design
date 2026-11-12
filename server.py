@@ -142,14 +142,24 @@ def copy_starting_images() -> None:
 
 
 def initialize_admin_from_environment() -> None:
-    """Hash production bootstrap passwords once; never replace an initialized admin."""
+    """Bootstrap a new admin, or apply one explicitly requested reset once."""
     data = admin_data()
-    if data.get("initialized"):
-        return
+    reset_requested = os.getenv("RESET_ADMIN_FROM_ENV", "").strip().lower() in {"true", "1", "yes"}
+
+    if not reset_requested:
+        if data.pop("environment_reset_applied", False):
+            write_json("admin", data)
+        if data.get("initialized"):
+            return
+
     password = os.getenv("INITIAL_ADMIN_PASSWORD", "")
     master_password = os.getenv("INITIAL_MASTER_PASSWORD", "")
+    if reset_requested and data.get("initialized") and data.get("environment_reset_applied"):
+        return
     if not password and not master_password:
         if PRODUCTION_MODE:
+            if reset_requested:
+                raise RuntimeError("Set INITIAL_ADMIN_PASSWORD and INITIAL_MASTER_PASSWORD to reset production admin access.")
             raise RuntimeError("Set INITIAL_ADMIN_PASSWORD and INITIAL_MASTER_PASSWORD for first production startup.")
         return
     if not password or not master_password:
@@ -161,13 +171,21 @@ def initialize_admin_from_environment() -> None:
         raise RuntimeError("Production admin passwords must be 12+ characters with upper/lowercase, a number, and a symbol.") from exc
     if hmac.compare_digest(password, master_password):
         raise RuntimeError("INITIAL_ADMIN_PASSWORD and INITIAL_MASTER_PASSWORD must be different.")
-    write_json("admin", {
+    data.update({
         "initialized": True,
         "password_hash": password_hash(password),
         "master_password_hash": password_hash(master_password),
-        "recovery_hash": "",
         "updated_at": now_iso(),
     })
+    if reset_requested:
+        data["environment_reset_applied"] = True
+    else:
+        data.setdefault("recovery_hash", "")
+    write_json("admin", data)
+    if reset_requested:
+        _sessions.clear()
+        _login_attempts.clear()
+        _recovery_attempts.clear()
 
 
 def session_key(token: str) -> str:
