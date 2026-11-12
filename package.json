@@ -1,0 +1,12 @@
+{
+  "name": "on-by-incense-design-storefront",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "check:js": "node --check js/api.js && node --check js/store.js && node --check js/motion.js && node --check js/main.js && node --check js/admin.js && node --check js/admin-setup.js",
+    "test:cart": "node --test tests/cart.test.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

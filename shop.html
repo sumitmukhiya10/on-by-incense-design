@@ -1,0 +1,32 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#171714">
+  <title>Shop Furniture | ON BY INCENSE DESIGN</title><meta name="description" content="Browse chairs, sofas, tables and office furniture from ON BY INCENSE DESIGN in New Delhi.">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="icon" href="/assets/logos/favicon.svg" type="image/svg+xml" sizes="any"><link rel="stylesheet" href="/css/base.css" /><link rel="stylesheet" href="/css/shop.css" />
+  <script type="module" src="/js/main.js"></script>
+</head>
+<body data-page="shop"><div id="site-header">
+<div class="announcement-bar" id="announcement-bar">Furniture for your home and workspace · Visit our Kirti Nagar showroom</div>
+<header class="site-header"><div class="nav-shell"><a class="brand" href="/index.html" aria-label="ON BY INCENSE DESIGN homepage"><img src="/assets/logos/ON_BY_INCENSE_DESIGN_Logo.svg" alt="" width="42" height="42"><span class="brand-copy"><strong class="brand-name">ON BY <span>INCENSE DESIGN</span></strong><small>Imported &amp; Indian Furniture | Interior Design Studio</small></span></a><nav class="main-nav" id="main-nav" aria-label="Main navigation"><a data-nav-page="home" href="/index.html">Home</a><a data-nav-page="shop" href="/shop.html">Shop Furniture</a><a data-nav-page="about" href="/about.html">About Us</a><a data-nav-page="contact" href="/contact.html">Contact</a><a data-nav-page="cart" href="/cart.html">Cart <span class="nav-cart-count" id="nav-cart-count">0</span></a></nav><div class="nav-actions"><form class="nav-search" id="nav-search" role="search"><label class="visually-hidden" for="nav-search-input">Search furniture</label><input id="nav-search-input" type="search" placeholder="Find your piece"><button type="submit" aria-label="Search"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.6"></circle><path d="m16 16 4.5 4.5"></path></svg></button></form><button class="nav-icon" id="cart-open" type="button" aria-label="Open shopping bag"><span class="cart-count" id="cart-count">0</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l1 13H4L5 8Z"></path><path d="M9 9V6a3 3 0 0 1 6 0v3"></path></svg></button><button class="menu-toggle" id="menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="main-nav"><span></span><span></span></button></div></div></header></div><main>
+  <section class="page-hero shop-hero"><p class="eyebrow light-eyebrow">THE COLLECTION</p><h1>Shop Furniture</h1><p>Browse by type, price, or availability. Open a piece for details, then add available furniture to your cart.</p></section>
+  <section class="shop-offer section-pad" aria-label="Furniture discounts">
+    <div class="shop-offer-card"><div><p class="eyebrow">BUNDLE SAVINGS</p><h2>Buy More, <em>Save More</em></h2></div><div id="shop-discount-progress" aria-live="polite"><p class="shop-discount-message"><strong>Save on eligible furniture when you buy more.</strong> Add items to your cart to see your savings.</p></div></div>
+  </section>
+  <section class="shop-layout section-pad">
+    <aside class="shop-filters" aria-label="Shop filters">
+      <div class="filter-heading"><h2>Filter furniture</h2><button class="text-button" id="clear-filters" type="button">Clear filters</button></div>
+      <label class="field-label" for="shop-search">Search by name</label><input id="shop-search" class="input" type="search" placeholder="e.g. dining chair">
+      <label class="field-label" for="category-filter">Category</label><select id="category-filter" class="input"><option value="">All Furniture</option><option value="Chairs">Chairs</option><option value="Sofas">Sofas</option><option value="Tables">Tables</option><option value="Office">Office Furniture</option><option value="Other Furniture">Other Furniture</option></select>
+      <label class="field-label" for="price-filter">Maximum listed price</label><div class="price-filter-row"><span>₹</span><input id="price-filter" class="input" type="number" min="0" inputmode="numeric" placeholder="Any price"></div>
+      <label class="field-label" for="availability-filter">Availability</label><select id="availability-filter" class="input"><option value="">Any availability</option><option value="in">In stock</option><option value="out">Out of stock</option></select>
+    </aside>
+    <div class="shop-results">
+      <div class="shop-toolbar"><p id="shop-count" aria-live="polite">Loading furniture…</p><label class="sort-label" for="sort-filter">Sort by <select id="sort-filter" class="sort-select"><option value="featured">Recommended</option><option value="price-asc">Price: low to high</option><option value="price-desc">Price: high to low</option><option value="name">Name: A to Z</option></select></label></div>
+      <div class="product-grid" id="shop-products" aria-live="polite"><div class="loading-state">Loading furniture…</div></div>
+      <div class="shop-pagination"><p id="shop-pagination-status" class="shop-pagination-status" aria-live="polite"></p><button class="button button-outline-dark hidden" id="shop-load-more" type="button">Show more furniture</button></div><div class="empty-state hidden" id="shop-empty"><span>—</span><h2>No furniture matches your search</h2><p>Try another name or remove one of your filters.</p><button class="button button-dark" id="empty-clear" type="button">Clear filters</button></div>
+    </div>
+  </section>
+</main><div id="site-footer"></div></body></html>

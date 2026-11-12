@@ -1,0 +1,13 @@
+tmp/
+json/
+server.py
+requirements.txt
+start-server.bat
+.venv/
+__pycache__/
+*.py[cod]
+tests/
+package.json
+README.md
+.gitignore
+.assetsignore

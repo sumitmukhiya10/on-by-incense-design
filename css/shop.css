@@ -1,0 +1,258 @@
+/* Shop page and filters */
+
+.shop-hero {
+  min-height: 310px;
+  padding: 64px 7vw;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  background:
+  radial-gradient(ellipse at 83% 46%, #37372d, transparent 38%), var(--ink);
+}
+
+.shop-hero h1 {
+  margin: 0 0 11px;
+  color: var(--white);
+  font-size: clamp(46px, 6vw, 74px);
+}
+
+.shop-hero > p:last-child {
+  max-width: 520px;
+  margin: 0;
+  color: rgba(255,255,255,.72);
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.shop-offer {
+  padding-top: 27px;
+  padding-bottom: 0;
+}
+
+.shop-offer-card {
+  padding: 21px 25px;
+  display: grid;
+  grid-template-columns: minmax(200px, .8fr) 1.2fr;
+  align-items: center;
+  gap: 24px;
+  border: 1px solid var(--stone);
+  background: #fff;
+}
+
+.shop-offer-card .eyebrow {
+  margin: 0 0 5px;
+}
+
+.shop-offer-card h2 {
+  margin: 0;
+  font-size: clamp(25px, 3vw, 36px);
+}
+
+.shop-discount-message {
+  margin: 0 0 10px;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.6;
+}
+
+.shop-discount-message strong {
+  color: var(--ink);
+}
+
+.shop-discount-tiers {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.shop-discount-tiers span {
+  padding: 7px 9px;
+  background: var(--paper);
+  color: var(--ink);
+  font-size: 9px;
+  font-weight: 700;
+}
+
+.shop-layout {
+  padding-top: 65px;
+  padding-bottom: 95px;
+  display: grid;
+  grid-template-columns: 218px 1fr;
+  gap: 44px;
+}
+
+.shop-filters {
+  align-self: start;
+  position: sticky;
+  top: 111px;
+  padding: 21px 18px;
+  border: 1px solid var(--stone);
+  background: rgba(255, 255, 255, 0.4);
+}
+
+.filter-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 21px;
+}
+
+.filter-heading h2 {
+  margin: 0;
+  font-size: 26px;
+}
+
+.price-filter-row {
+  position: relative;
+}
+
+.price-filter-row > span {
+  position: absolute;
+  top: 20px;
+  left: 12px;
+  z-index: 1;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.price-filter-row .input {
+  padding-left: 27px;
+}
+
+.shop-toolbar {
+  min-height: 46px;
+  margin-bottom: 19px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--stone);
+}
+
+.shop-toolbar p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 10px;
+}
+
+.sort-label {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: var(--muted);
+  font-size: 9px;
+}
+
+.sort-select {
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.shop-pagination {
+  margin-top: 28px;
+  display: grid;
+  justify-items: center;
+  gap: 6px;
+}
+
+.shop-pagination-status {
+  min-height: 18px;
+  margin: 0;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.shop-pagination .button { min-width: 220px; }
+
+@media (max-width: 800px) {
+  .shop-layout {
+    grid-template-columns: 185px 1fr;
+    gap: 23px;
+  }
+
+  .shop-filters {
+    padding: 17px 13px;
+  }
+
+}
+
+@media (max-width: 580px) {
+  .shop-hero {
+    min-height: 260px;
+    padding: 45px 6vw;
+  }
+
+  .shop-offer {
+    padding-top: 18px;
+  }
+
+  .shop-offer-card {
+    grid-template-columns: 1fr;
+    gap: 13px;
+    padding: 17px;
+  }
+
+  .shop-discount-tiers span {
+    font-size: 9px;
+  }
+
+  .shop-layout {
+    padding-top: 31px;
+    padding-bottom: 65px;
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+
+  .shop-filters {
+    position: static;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 12px;
+    padding: 14px;
+  }
+
+  .shop-filters .input { min-width: 0; font-size: 13px; }
+
+  .filter-heading {
+    grid-column: 1 / -1;
+    margin-bottom: 9px;
+  }
+
+  .filter-heading h2 {
+    font-size: 23px;
+  }
+
+  .shop-filters .field-label {
+    margin-bottom: 8px;
+    font-size: 11px;
+  }
+
+  .shop-toolbar {
+    gap: 10px;
+  }
+
+  .sort-label {
+    gap: 3px;
+    font-size: 11px;
+  }
+
+  .sort-select {
+    max-width: 130px;
+    font-size: 12px;
+  }
+
+}
+
+@media (max-width: 380px) {
+  .shop-filters { grid-template-columns: minmax(0, 1fr); }
+  .filter-heading { grid-column: auto; }
+  .shop-toolbar { align-items: flex-start; flex-direction: column; padding-bottom: 10px; }
+  .sort-label { min-height: 44px; gap: 8px; font-size: 11px; }
+  .sort-select { min-height: 44px; font-size: 12px; }
+  .shop-pagination .button { width: 100%; }
+
+}
+

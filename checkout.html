@@ -1,0 +1,129 @@
+﻿<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#171714" />
+    <title>Checkout | ON BY INCENSE DESIGN</title>
+    <meta
+      name="description"
+      content="Share your details with the ON BY INCENSE DESIGN showroom to start your order."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" href="/assets/logos/favicon.svg" type="image/svg+xml" sizes="any" />
+    <link rel="stylesheet" href="/css/base.css" />
+    <link rel="stylesheet" href="/css/checkout.css" />
+    <script type="module" src="/js/main.js"></script>
+  </head>
+  <body data-page="checkout">
+    <div id="site-header">
+<div class="announcement-bar" id="announcement-bar">Furniture for your home and workspace · Visit our Kirti Nagar showroom</div>
+<header class="site-header"><div class="nav-shell"><a class="brand" href="/index.html" aria-label="ON BY INCENSE DESIGN homepage"><img src="/assets/logos/ON_BY_INCENSE_DESIGN_Logo.svg" alt="" width="42" height="42"><span class="brand-copy"><strong class="brand-name">ON BY <span>INCENSE DESIGN</span></strong><small>Imported &amp; Indian Furniture | Interior Design Studio</small></span></a><nav class="main-nav" id="main-nav" aria-label="Main navigation"><a data-nav-page="home" href="/index.html">Home</a><a data-nav-page="shop" href="/shop.html">Shop Furniture</a><a data-nav-page="about" href="/about.html">About Us</a><a data-nav-page="contact" href="/contact.html">Contact</a><a data-nav-page="cart" href="/cart.html">Cart <span class="nav-cart-count" id="nav-cart-count">0</span></a></nav><div class="nav-actions"><form class="nav-search" id="nav-search" role="search"><label class="visually-hidden" for="nav-search-input">Search furniture</label><input id="nav-search-input" type="search" placeholder="Find your piece"><button type="submit" aria-label="Search"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.6"></circle><path d="m16 16 4.5 4.5"></path></svg></button></form><button class="nav-icon" id="cart-open" type="button" aria-label="Open shopping bag"><span class="cart-count" id="cart-count">0</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l1 13H4L5 8Z"></path><path d="M9 9V6a3 3 0 0 1 6 0v3"></path></svg></button><button class="menu-toggle" id="menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="main-nav"><span></span><span></span></button></div></div></header></div>
+    <main>
+      <section class="page-title section-pad">
+        <p class="eyebrow">SEND AN ORDER REQUEST</p>
+        <h1>Review your order and <em>send it.</em></h1>
+        <p>
+          Enter your delivery details, then review and send your request in
+          WhatsApp. The showroom will confirm availability, delivery, and final
+          pricing. No payment is taken on this website.
+        </p>
+      </section>
+      <nav class="checkout-steps section-pad" aria-label="Order steps">
+        <span>1. Review cart</span><span aria-hidden="true">›</span>
+        <strong aria-current="step">2. Delivery details</strong><span aria-hidden="true">›</span>
+        <span>3. Send request on WhatsApp</span>
+      </nav>
+      <section class="checkout-layout section-pad">
+        <form class="checkout-form" id="checkout-form">
+          <div class="form-section">
+            <p class="eyebrow">01 / YOUR DETAILS</p>
+            <div class="form-grid">
+              <label class="field-label full-field" for="customer-name"
+                >Full name <span>*</span
+                ><input
+                  class="input"
+                  id="customer-name"
+                  name="customer_name"
+                  autocomplete="name"
+                  required
+                  minlength="2"
+                  maxlength="120"
+              /></label>
+              <label class="field-label" for="customer-phone"
+                >Phone number <span>*</span
+                ><input
+                  class="input"
+                  id="customer-phone"
+                  name="phone"
+                  type="tel"
+                  autocomplete="tel"
+                  required
+                  minlength="8"
+                  maxlength="30"
+                  placeholder="+91"
+              /></label>
+            </div>
+          </div>
+          <div class="form-section">
+            <p class="eyebrow">02 / DELIVERY ADDRESS</p>
+            <div class="form-grid">
+              <label class="field-label full-field" for="customer-address"
+                >Street address <span>*</span
+                ><textarea
+                  class="input"
+                  id="customer-address"
+                  name="address"
+                  autocomplete="street-address"
+                  required
+                  minlength="5"
+                  rows="3"
+                ></textarea>
+              </label>
+              <label class="field-label" for="customer-city"
+                >City <span>*</span
+                ><input
+                  class="input"
+                  id="customer-city"
+                  name="city"
+                  autocomplete="address-level2"
+                  required
+              /></label>
+              <label class="field-label" for="customer-state"
+                >State <span>*</span
+                ><input
+                  class="input"
+                  id="customer-state"
+                  name="state"
+                  autocomplete="address-level1"
+                  required
+              /></label>
+            </div>
+          </div>
+          <p class="form-error" id="checkout-error" role="alert"></p>
+          <button
+            class="button button-dark button-wide"
+            type="submit"
+            id="place-order"
+          >
+            Continue to WhatsApp <span aria-hidden="true">↗</span>
+          </button>
+          <p class="checkout-legal">
+            WhatsApp opens a message with your order details. Press Send to
+            contact the showroom. Your request is not confirmed until the
+            showroom replies. No payment is collected here.
+          </p>
+        </form>
+        <aside class="checkout-summary" id="checkout-summary">
+          <div class="loading-state">Preparing your order…</div>
+        </aside>
+      </section>
+    </main>
+    <div id="site-footer"></div>
+  </body>
+</html>

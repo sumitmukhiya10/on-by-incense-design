@@ -1,0 +1,8 @@
+# Runtime dependencies for the Railway FastAPI service.
+fastapi>=0.115,<1.0
+starlette>=0.46,<1.0
+uvicorn[standard]>=0.34,<1.0
+python-multipart>=0.0.20,<1.0
+
+# FastAPI TestClient dependency used by tests/test_backend.py.
+httpx>=0.28,<1.0

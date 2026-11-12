@@ -1,0 +1,33 @@
+{
+  "tiers": [
+    {
+      "min_items": 1,
+      "percent": 0
+    },
+    {
+      "min_items": 2,
+      "percent": 3
+    },
+    {
+      "min_items": 3,
+      "percent": 5
+    },
+    {
+      "min_items": 4,
+      "percent": 8
+    },
+    {
+      "min_items": 5,
+      "percent": 10
+    },
+    {
+      "min_items": 6,
+      "percent": 15
+    }
+  ],
+  "max_discount_percent": 15,
+  "min_eligible_price_paise": 0,
+  "max_discount_paise": 0,
+  "discounts_enabled": true,
+  "free_delivery_enabled": false
+}

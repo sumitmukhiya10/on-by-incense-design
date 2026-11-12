@@ -1,0 +1,937 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#171714" />
+    <meta name="robots" content="noindex,nofollow" />
+    <title>Store Manager | ON BY INCENSE DESIGN</title>
+    <link rel="icon" href="/assets/logos/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/css/base.css" />
+    <link rel="stylesheet" href="/css/admin.css" />
+    <script type="module" src="/js/admin.js"></script>
+  </head>
+  <body data-page="admin">
+    <main class="admin-shell">
+      <div class="admin-brand">
+        <a class="brand" href="/index.html"
+          ><img
+            src="/assets/logos/ON_BY_INCENSE_DESIGN_Logo.svg"
+            alt=""
+            width="42"
+            height="42"
+          /><span class="brand-copy"
+            ><strong>ON BY <span>INCENSE DESIGN</span></strong
+            ><small>STORE ADMIN</small></span
+          ></a
+        >
+      </div>
+
+      <section class="admin-login-card" id="admin-login-view">
+        <h1>Admin Login</h1>
+        <form id="admin-login-form">
+          <label class="field-label" for="admin-password"
+            >Password<span class="admin-password-wrap"
+              ><input
+                class="input"
+                id="admin-password"
+                name="password"
+                type="password"
+                autocomplete="current-password"
+                required
+              /><button
+                class="admin-password-toggle"
+                id="toggle-admin-password"
+                type="button"
+                aria-controls="admin-password"
+                aria-label="Show password"
+              >
+                Show
+              </button></span
+            ></label
+          >
+          <p class="form-error" id="login-error" role="alert"></p>
+          <button
+            class="button button-dark button-wide"
+            type="submit"
+            id="login-button"
+          >
+            Log in
+          </button>
+        </form>
+        <button class="text-button" id="show-recovery" type="button">
+          Forgot your password?
+        </button>
+      </section>
+
+      <section class="admin-login-card hidden" id="admin-recovery-view">
+        <h1>Recover Admin Access</h1>
+        <form id="recovery-form">
+          <p class="admin-inline-note">
+            Use your master recovery password. If setup gave you a one-time
+            backup code, you can use that instead.
+          </p>
+          <label class="field-label" for="recovery-secret"
+            >Master recovery password or one-time backup code<input
+              class="input"
+              id="recovery-secret"
+              type="password"
+              autocomplete="current-password"
+              required
+          /></label>
+          <label class="field-label" for="recovery-new-password"
+            >New password<input
+              class="input"
+              id="recovery-new-password"
+              type="password"
+              autocomplete="new-password"
+              minlength="12"
+              required
+          /></label>
+          <label class="field-label" for="recovery-confirm-password"
+            >Confirm new password<input
+              class="input"
+              id="recovery-confirm-password"
+              type="password"
+              autocomplete="new-password"
+              minlength="12"
+              required
+          /></label>
+          <p class="form-error" id="recovery-error" role="alert"></p>
+          <button
+            class="button button-dark button-wide"
+            id="recovery-submit"
+            type="submit"
+          >
+            Reset password
+          </button>
+        </form>
+        <button class="text-button" id="cancel-recovery" type="button">
+          Back to login
+        </button>
+      </section>
+
+      <section class="admin-login-card hidden" id="admin-first-setup-view">
+        <h1>Create Admin Password</h1>
+        <p class="admin-inline-note">
+          This is the first setup for this store. Choose a password for the
+          owner account.
+        </p>
+        <form id="admin-first-setup-form">
+          <label class="field-label" for="first-admin-password"
+            >Admin password<input
+              class="input"
+              id="first-admin-password"
+              type="password"
+              autocomplete="new-password"
+              minlength="12"
+              required
+            /><small
+              >At least 12 characters with upper and lower case letters, a
+              number, and a symbol.</small
+            ></label
+          >
+          <label class="field-label" for="first-admin-confirm"
+            >Confirm password<input
+              class="input"
+              id="first-admin-confirm"
+              type="password"
+              autocomplete="new-password"
+              minlength="12"
+              required
+          /></label>
+          <label class="field-label" for="first-admin-master-password"
+            >Master recovery password<input
+              class="input"
+              id="first-admin-master-password"
+              type="password"
+              autocomplete="new-password"
+              minlength="12"
+              required
+            /><small
+              >Use this separate password to reset your Admin password if you
+              forget it. Keep it somewhere private.</small
+            ></label
+          >
+          <label class="field-label" for="first-admin-master-confirm"
+            >Confirm master recovery password<input
+              class="input"
+              id="first-admin-master-confirm"
+              type="password"
+              autocomplete="new-password"
+              minlength="12"
+              required
+          /></label>
+          <p class="form-error" id="first-admin-error" role="alert"></p>
+          <button
+            class="button button-dark button-wide"
+            id="first-admin-submit"
+            type="submit"
+          >
+            Save Admin Password
+          </button>
+        </form>
+      </section>
+
+      <section class="admin-app hidden" id="admin-app-view">
+        <header class="admin-topbar">
+          <div>
+            <p class="eyebrow">STORE MANAGER</p>
+            <h1>Welcome to your furniture store</h1>
+            <p id="admin-welcome" class="admin-welcome">
+              Manage your products, prices, offers, and website here.
+            </p>
+          </div>
+          <div class="admin-header-actions">
+            <a
+              class="button button-outline-dark"
+              href="/"
+              target="_blank"
+              rel="noopener"
+              >View Website</a
+            ><button
+              class="button button-outline-dark"
+              id="admin-logout"
+              type="button"
+            >
+              Log out
+            </button>
+          </div>
+        </header>
+        <nav class="admin-tabs" aria-label="Store management">
+          <button class="admin-tab active" type="button" data-view="overview">
+            Home</button
+          ><button class="admin-tab" type="button" data-view="products">
+            Furniture</button
+          ><button class="admin-tab" type="button" data-view="orders">
+            Orders</button
+          ><button class="admin-tab" type="button" data-view="enquiries">
+            Messages</button
+          ><button class="admin-tab" type="button" data-view="homepage">
+            Homepage</button
+          ><button class="admin-tab" type="button" data-view="discounts">
+            Offers</button
+          ><button class="admin-tab" type="button" data-view="settings">
+            Store Details</button
+          ><button class="admin-tab" type="button" data-view="password">
+            Change Password
+          </button>
+        </nav>
+        <p
+          class="admin-toast"
+          id="admin-toast"
+          role="status"
+          aria-live="polite"
+        ></p>
+
+        <section class="admin-panel" id="panel-overview" data-panel="overview">
+          <div class="admin-overview-intro">
+            <p class="eyebrow">STORE OVERVIEW</p>
+            <h2>What would you like to do?</h2>
+            <p>
+              Your changes are saved to the store and appear on the website
+              after you save.
+            </p>
+            <a
+              class="button button-outline-dark"
+              href="/"
+              target="_blank"
+              rel="noopener"
+              >View your website</a
+            >
+          </div>
+          <div class="admin-quick-actions">
+            <button class="admin-quick-card" type="button" data-quick="add">
+              <span>01</span><strong>Add New Furniture</strong
+              ><small>Add a product photo, price, and availability.</small>
+            </button>
+            <button
+              class="admin-quick-card"
+              type="button"
+              data-quick="products"
+            >
+              <span>02</span><strong>Manage Products</strong
+              ><small>Update prices, photos, or remove a listing.</small>
+            </button>
+            <button
+              class="admin-quick-card"
+              type="button"
+              data-quick="discounts"
+            >
+              <span>03</span><strong>Manage Offers</strong
+              ><small
+                >Set the savings customers get when buying together.</small
+              >
+            </button>
+            <button
+              class="admin-quick-card"
+              type="button"
+              data-quick="homepage"
+            >
+              <span>04</span><strong>Edit homepage</strong
+              ><small>Update the welcome message and main photo.</small>
+            </button>
+            <button
+              class="admin-quick-card"
+              type="button"
+              data-quick="settings"
+            >
+              <span>05</span><strong>Store details</strong
+              ><small
+                >Change WhatsApp number, address, and opening hours.</small
+              >
+            </button>
+            <button
+              class="admin-quick-card"
+              type="button"
+              data-quick="password"
+            >
+              <span>06</span><strong>Account access</strong
+              ><small>Change your Admin password.</small>
+            </button>
+          </div>
+        </section>
+
+        <section class="admin-panel" id="panel-products" data-panel="products">
+          <div class="admin-section-title">
+            <div>
+              <p class="eyebrow">YOUR CATALOG</p>
+              <h2>Your furniture</h2>
+            </div>
+            <button class="button button-dark" id="add-product" type="button">
+              Add New Furniture +
+            </button>
+          </div>
+          <div class="admin-list-controls">
+            <label class="field-label" for="admin-product-search"
+              >Search furniture by name<input
+                class="input"
+                id="admin-product-search"
+                type="search"
+                placeholder="Type a furniture name" /></label
+            ><label class="field-label" for="admin-product-filter"
+              >Show<select class="input" id="admin-product-filter">
+                <option value="all">All</option>
+                <option value="available">Available</option>
+                <option value="unavailable">Unavailable</option>
+                <option value="hidden">Hidden from shop</option>
+                <option value="sale">On Sale</option>
+              </select></label
+            >
+          </div>
+          <p class="admin-load-error" id="products-error" role="alert"></p>
+          <p id="product-count" class="admin-inline-note"></p>
+          <div id="admin-products-list" aria-live="polite">
+            <p class="loading-state">Loading products…</p>
+          </div>
+          <form class="admin-editor hidden" id="product-form">
+            <div class="admin-section-title">
+              <div>
+                <p class="eyebrow">PRODUCT DETAILS</p>
+                <h2 id="product-form-title">Add new product</h2>
+              </div>
+              <button
+                class="icon-button"
+                id="close-product-form"
+                type="button"
+                aria-label="Close product form"
+              >
+                ×
+              </button>
+            </div>
+            <input type="hidden" id="product-id" />
+            <div class="admin-step">
+              <span>1</span>
+              <div>
+                <h3>Add furniture photos</h3>
+                <p>
+                  Choose a photo from your device, or paste a public image link.
+                </p>
+              </div>
+            </div>
+            <label class="field-label full-field" for="product-images"
+              >Choose photo file(s)<input
+                class="input"
+                id="product-images"
+                type="file"
+                accept="image/jpeg,image/png,image/webp"
+                multiple
+              /><small>JPG, PNG, or WebP · up to 15 MB each.</small></label
+            >
+            <div class="admin-form-grid">
+              <label class="field-label full-field" for="product-image-url"
+                >Or add a public image link<input
+                  class="input"
+                  id="product-image-url"
+                  type="url"
+                  inputmode="url"
+                  placeholder="https://drive.google.com/file/d/..."
+                /><small
+                  >For Google Drive, set sharing to “Anyone with the link” so
+                  customers can see the photo.</small
+                ></label
+              >
+            </div>
+            <button
+              class="button button-outline-dark"
+              id="add-product-image-link"
+              type="button"
+            >
+              Add image link
+            </button>
+            <p
+              class="form-error"
+              id="product-image-link-error"
+              role="alert"
+            ></p>
+            <span id="product-image-list" class="image-upload-list"></span>
+            <div class="admin-form-grid">
+              <label class="field-label" for="product-name"
+                >Furniture name<input
+                  class="input"
+                  id="product-name"
+                  required
+                  minlength="2"
+                  maxlength="160"
+                  placeholder="For example: Oak dining chair"
+              /></label>
+              <label class="field-label" for="product-category"
+                >Furniture type<select
+                  class="input"
+                  id="product-category"
+                  required
+                >
+                  <option value="Chairs">Chairs</option>
+                  <option value="Sofas">Sofas</option>
+                  <option value="Tables">Tables</option>
+                  <option value="Office">Office Furniture</option>
+                  <option value="Other Furniture">Other Furniture</option>
+                </select></label
+              >
+              <label class="field-label" for="product-price"
+                >Price (₹)<input
+                  class="input"
+                  id="product-price"
+                  type="number"
+                  min="0.01"
+                  step="0.01"
+                  inputmode="decimal"
+                  required
+                  placeholder="0.00"
+              /></label>
+              <label class="field-label" for="product-sale-price"
+                >Sale price (optional)<input
+                  class="input"
+                  id="product-sale-price"
+                  type="number"
+                  min="0.01"
+                  step="0.01"
+                  inputmode="decimal"
+                  placeholder="Leave blank if there is no sale"
+                /><small
+                  >Leave this empty if the furniture is not on sale.</small
+                ><button
+                  class="text-button remove-sale"
+                  id="remove-sale"
+                  type="button"
+                >
+                  Remove Sale
+                </button></label
+              >
+              <label class="field-label full-field" for="product-description"
+                >Short description (optional)<textarea
+                  class="input"
+                  id="product-description"
+                  rows="3"
+                  maxlength="2000"
+                  placeholder="Add a few helpful details for customers."
+                ></textarea>
+              </label>
+            </div>
+            <p
+              class="admin-inline-note"
+              id="sale-preview"
+              aria-live="polite"
+            ></p>
+            <div class="admin-step">
+              <span>2</span>
+              <div>
+                <h3>Shop visibility and sale availability</h3>
+                <p>
+                  These settings do different things. Published listings remain
+                  visible when they are unavailable, but customers cannot add
+                  them to their cart.
+                </p>
+              </div>
+            </div>
+            <div class="admin-checkboxes availability-checkboxes">
+              <label
+                ><input id="product-active" type="checkbox" /> Published on
+                Website
+                <small
+                  >Turn off to hide this listing and its detail page from the
+                  public shop.</small
+                ></label
+              >
+              <label
+                ><input id="product-availability" type="checkbox" /> Available
+                for Sale
+                <small
+                  >Turn off when temporarily unavailable. The published product
+                  details stay visible.</small
+                ></label
+              >
+            </div>
+            <details class="admin-advanced">
+              <summary>Optional settings</summary>
+              <p class="admin-inline-note">
+                Most listings only need photos, a name, price, and availability.
+                Set these only when needed.
+              </p>
+              <div class="admin-form-grid">
+                <label class="field-label" for="product-sale-start"
+                  >Sale starts (optional)<input
+                    class="input"
+                    id="product-sale-start"
+                    type="datetime-local" /></label
+                ><label class="field-label" for="product-sale-end"
+                  >Sale ends (optional)<input
+                    class="input"
+                    id="product-sale-end"
+                    type="datetime-local"
+                /></label>
+              </div>
+              <div class="admin-checkboxes">
+                <label
+                  ><input id="product-featured" type="checkbox" /> Show in
+                  homepage collection</label
+                >
+                <label
+                  ><input id="product-best" type="checkbox" /> Mark as Best
+                  Seller</label
+                >
+                <label
+                  ><input id="product-new" type="checkbox" /> Mark as New
+                  Arrival</label
+                >
+                <label
+                  ><input id="product-discount" type="checkbox" checked />
+                  Include in Buy More, Save More</label
+                >
+                <label
+                  ><input id="product-sale-stack" type="checkbox" /> Allow
+                  another discount with this sale</label
+                >
+              </div>
+            </details>
+            <input id="product-sale-active" type="checkbox" checked hidden />
+            <div
+              id="product-save-feedback"
+              class="product-save-feedback hidden"
+              role="status"
+              aria-live="polite"
+            ></div>
+            <p class="form-error" id="product-error" role="alert"></p>
+            <div class="admin-form-actions">
+              <button
+                class="button button-dark"
+                id="save-product"
+                type="submit"
+              >
+                Save furniture</button
+              ><button
+                class="button button-outline-dark"
+                id="cancel-product"
+                type="button"
+              >
+                Cancel
+              </button>
+            </div>
+          </form>
+        </section>
+
+        <section
+          class="admin-panel hidden"
+          id="panel-orders"
+          data-panel="orders"
+        >
+          <div class="admin-section-title">
+            <div>
+              <p class="eyebrow">CUSTOMER REQUESTS</p>
+              <h2>Orders</h2>
+            </div>
+            <button
+              class="button button-outline-dark"
+              id="orders-refresh"
+              type="button"
+            >
+              Refresh
+            </button>
+          </div>
+          <label class="field-label" for="orders-filter"
+            >Show orders<select class="input" id="orders-filter">
+              <option value="">All orders</option>
+              <option>Pending showroom confirmation</option>
+              <option>Confirmed</option>
+              <option>Processing</option>
+              <option>Delivered</option>
+              <option>Cancelled</option>
+            </select></label
+          >
+          <p class="form-error" id="orders-error" role="alert"></p>
+          <div class="admin-inbox-list" id="admin-orders-list">
+            <p class="loading-state">Loading orders…</p>
+          </div>
+        </section>
+
+        <section
+          class="admin-panel hidden"
+          id="panel-enquiries"
+          data-panel="enquiries"
+        >
+          <div class="admin-section-title">
+            <div>
+              <p class="eyebrow">CUSTOMER MESSAGES</p>
+              <h2>Enquiries</h2>
+            </div>
+            <button
+              class="button button-outline-dark"
+              id="enquiries-refresh"
+              type="button"
+            >
+              Refresh
+            </button>
+          </div>
+          <p class="admin-inline-note">
+            New messages appear first. Reply directly on WhatsApp or delete a
+            message.
+          </p>
+          <p class="admin-inline-note" id="enquiries-count"></p>
+          <p class="form-error" id="enquiries-error" role="alert"></p>
+          <div class="admin-inbox-list" id="admin-enquiries-list">
+            <p class="loading-state">Loading messages…</p>
+          </div>
+          <div class="admin-page-actions">
+            <button
+              class="button button-outline-dark"
+              id="enquiries-previous"
+              type="button"
+            >
+              Previous</button
+            ><span id="enquiries-page-label" class="admin-inline-note"></span
+            ><button
+              class="button button-outline-dark"
+              id="enquiries-next"
+              type="button"
+            >
+              Next
+            </button>
+          </div>
+        </section>
+
+        <section
+          class="admin-panel hidden"
+          id="panel-homepage"
+          data-panel="homepage"
+        >
+          <div class="admin-section-title">
+            <div>
+              <p class="eyebrow">PUBLIC HOMEPAGE</p>
+              <h2>Edit Homepage</h2>
+            </div>
+            <a class="button button-outline-dark" href="/index.html"
+              >View Homepage</a
+            >
+          </div>
+          <form class="admin-editor admin-editor-visible" id="homepage-form">
+            <div class="admin-form-grid">
+              <label class="field-label" for="home-heading"
+                >Hero heading<input
+                  class="input"
+                  id="home-heading"
+                  maxlength="120"
+                  required
+              /></label>
+              <label class="field-label" for="home-cta-text"
+                >Main button text<input
+                  class="input"
+                  id="home-cta-text"
+                  maxlength="40"
+                  required
+              /></label>
+              <input id="home-cta-url" type="hidden" value="/shop.html" />
+              <label class="field-label" for="home-hero-image"
+                >Choose homepage banner photo<small
+                  >JPG, PNG, or WebP · up to 15 MB.</small
+                ><input
+                  class="input"
+                  id="home-hero-image"
+                  type="file"
+                  accept="image/jpeg,image/png,image/webp" /><span
+                  id="home-hero-image-preview"
+                  class="image-upload-list"
+                ></span
+              ></label>
+              <label class="field-label full-field" for="home-description"
+                >Short description<textarea
+                  class="input"
+                  id="home-description"
+                  rows="3"
+                  maxlength="400"
+                  required
+                ></textarea>
+              </label>
+              <label class="field-label" for="home-promo-heading-setting"
+                >Savings section heading<input
+                  class="input"
+                  id="home-promo-heading-setting"
+                  maxlength="100"
+                  required
+              /></label>
+            </div>
+            <div class="admin-checkboxes">
+              <label
+                ><input id="home-new-enabled" type="checkbox" /> Show New
+                Arrivals</label
+              ><label
+                ><input id="home-offers-enabled" type="checkbox" /> Show Special
+                Offers when a valid sale is active</label
+              >
+            </div>
+            <p class="admin-inline-note">
+              Choose featured furniture and Best Sellers in each furniture
+              item’s optional settings. Customers automatically receive
+              discounts on eligible items in their cart.
+            </p>
+            <p class="form-error" id="homepage-error" role="alert"></p>
+            <div class="admin-form-actions">
+              <button
+                class="button button-dark"
+                id="save-homepage"
+                type="submit"
+              >
+                Save homepage
+              </button>
+            </div>
+          </form>
+        </section>
+
+        <section
+          class="admin-panel hidden"
+          id="panel-discounts"
+          data-panel="discounts"
+        >
+          <div class="admin-section-title">
+            <div>
+              <p class="eyebrow">CUSTOMER SAVINGS</p>
+              <h2>Buy More, Save More</h2>
+            </div>
+          </div>
+          <form class="admin-editor admin-editor-visible" id="discount-form">
+            <p class="admin-inline-note">
+              Reward customers when they buy more furniture. For each step,
+              choose how many eligible items are in the order and the percentage
+              they save.
+            </p>
+            <div class="discount-tier-header">
+              <span>When customers buy</span><span>They save</span><span></span>
+            </div>
+            <div id="discount-tiers"></div>
+            <button class="text-button" id="add-tier" type="button">
+              + Add a discount step
+            </button>
+            <details class="admin-advanced">
+              <summary>Advanced Settings</summary>
+              <div class="admin-form-grid discount-settings-grid">
+                <label class="field-label" for="max-discount"
+                  >Maximum discount (%)<small
+                    >Discounts cannot exceed 80%.</small
+                  ><input
+                    class="input"
+                    id="max-discount"
+                    type="number"
+                    min="0"
+                    max="80"
+                    required
+                /></label>
+                <label class="field-label" for="minimum-price"
+                  >Minimum eligible product price (INR)<input
+                    class="input"
+                    id="minimum-price"
+                    type="number"
+                    min="0"
+                    step="0.01"
+                    required
+                /></label>
+                <label class="field-label" for="maximum-savings"
+                  >Maximum savings per order (INR)<small
+                    >0 means no currency cap.</small
+                  ><input
+                    class="input"
+                    id="maximum-savings"
+                    type="number"
+                    min="0"
+                    step="0.01"
+                    required
+                /></label>
+              </div>
+              <div class="admin-checkboxes">
+                <label
+                  ><input id="free-delivery" type="checkbox" /> Offer free
+                  delivery</label
+                >
+              </div>
+            </details>
+            <label class="discount-enabled"
+              ><input id="discounts-active" type="checkbox" /> Turn on Buy More,
+              Save More</label
+            >
+            <p class="form-error" id="discount-error" role="alert"></p>
+            <div class="admin-form-actions">
+              <button class="button button-dark" type="submit">
+                Save discounts
+              </button>
+            </div>
+          </form>
+        </section>
+
+        <section
+          class="admin-panel hidden"
+          id="panel-settings"
+          data-panel="settings"
+        >
+          <div class="admin-section-title">
+            <div>
+              <p class="eyebrow">SHOWROOM DETAILS</p>
+              <h2>Store Settings</h2>
+            </div>
+          </div>
+          <form class="admin-editor admin-editor-visible" id="settings-form">
+            <div class="admin-form-grid">
+              <label class="field-label" for="setting-name"
+                >Business Name<input class="input" id="setting-name" required
+              /></label>
+              <label class="field-label" for="setting-whatsapp"
+                >WhatsApp number<input
+                  class="input"
+                  id="setting-whatsapp"
+                  type="tel"
+                  required
+                /><small
+                  >Include the country code. Customers will message this number
+                  on WhatsApp.</small
+                ></label
+              >
+              <label class="field-label" for="setting-email"
+                >Contact email (optional)<input
+                  class="input"
+                  id="setting-email"
+                  type="email"
+                /><small
+                  >Leave blank to hide email from customers. Add one here
+                  whenever you are ready.</small
+                ></label
+              >
+              <label class="field-label" for="setting-hours"
+                >Opening hours<input class="input" id="setting-hours" required
+              /></label>
+              <label class="field-label full-field" for="setting-address"
+                >Store Address<textarea
+                  class="input"
+                  id="setting-address"
+                  rows="3"
+                  required
+                ></textarea>
+              </label>
+              <label class="field-label full-field" for="setting-announcement"
+                >Short store announcement<input
+                  class="input"
+                  id="setting-announcement"
+                  maxlength="160"
+              /></label>
+            </div>
+            <p class="form-error" id="settings-error" role="alert"></p>
+            <div class="admin-form-actions">
+              <button
+                class="button button-dark"
+                id="save-settings"
+                type="submit"
+              >
+                Save Store Settings
+              </button>
+            </div>
+          </form>
+        </section>
+
+        <section
+          class="admin-panel hidden"
+          id="panel-password"
+          data-panel="password"
+        >
+          <div class="admin-section-title">
+            <div>
+              <p class="eyebrow">SECURE ACCESS</p>
+              <h2>Change Password</h2>
+            </div>
+          </div>
+          <form class="admin-editor admin-editor-visible" id="password-form">
+            <p class="admin-inline-note">
+              Choose a strong password that you do not use for other accounts.
+            </p>
+            <div class="admin-form-grid">
+              <label class="field-label" for="current-password"
+                >Current password<input
+                  class="input"
+                  id="current-password"
+                  type="password"
+                  autocomplete="current-password"
+                  required /></label
+              ><label class="field-label" for="new-password"
+                >New password<input
+                  class="input"
+                  id="new-password"
+                  type="password"
+                  autocomplete="new-password"
+                  minlength="12"
+                  required
+                /><small
+                  >12+ characters, upper and lower case, a number, and a
+                  symbol.</small
+                ></label
+              ><label class="field-label" for="confirm-password"
+                >Confirm new password<input
+                  class="input"
+                  id="confirm-password"
+                  type="password"
+                  autocomplete="new-password"
+                  minlength="12"
+                  required
+              /></label>
+            </div>
+            <p class="form-error" id="password-error" role="alert"></p>
+            <div class="admin-form-actions">
+              <button
+                class="button button-dark"
+                id="save-password"
+                type="submit"
+              >
+                Change Password
+              </button>
+            </div>
+          </form>
+          <p class="admin-inline-note">
+            Forgot your Admin password? Use your master recovery password to
+            reset it.
+          </p>
+          <button
+            class="button button-outline-dark"
+            id="use-master-recovery"
+            type="button"
+          >
+            Reset Admin password with recovery password
+          </button>
+        </section>
+      </section>
+    </main>
+  </body>
+</html>
